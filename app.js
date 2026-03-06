@@ -1,19 +1,21 @@
+require("dotenv").config();
+
 const express = require("express");
+const connectDB = require("./config/db");
+
 const app = express();
 
-app.use(express.json());
+connectDB();
 
-const { logger } = require("./middleware/logger");
-app.use(logger);
+app.use(express.json());
 
 app.use("/products", require("./routes/productRoutes"));
 app.use("/users", require("./routes/userRoutes"));
 app.use("/cart", require("./routes/cartRoutes"));
 app.use("/orders", require("./routes/orderRoutes"));
 
-const { errorHandler } = require("./middleware/errorHandler");
-app.use(errorHandler);
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000,()=>{
- console.log("Server running on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

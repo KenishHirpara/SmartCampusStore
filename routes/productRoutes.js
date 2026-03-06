@@ -1,9 +1,18 @@
-const express=require("express");
-const router=express.Router();
-const {validateProduct}=require("../middleware/validate");
-const {getProducts,addProduct}=require("../controllers/productController");
+const express = require("express");
+const router = express.Router();
 
-router.get("/",getProducts);
-router.post("/",validateProduct,addProduct);
+const {
+  getProducts,
+  getProductById,
+  addProduct,
+  updateProduct,
+  deleteProduct
+} = require("../controllers/productController");
 
-module.exports=router;
+router.get("/", getProducts);
+router.get("/:id", getProductById);
+router.post("/", addProduct);
+router.put("/:id", updateProduct);
+router.delete("/:id", deleteProduct);
+
+module.exports = router;

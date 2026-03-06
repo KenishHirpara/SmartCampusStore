@@ -1,25 +1,30 @@
-let products=[
- {id:1,name:"Notebook",price:50},
- {id:2,name:"Pen",price:20},
- {id:3,name:"Calculator",price:500}
-];
+const Product = require("../models/Product");
 
-exports.getProducts=(req,res,next)=>{
- try{
-   res.json(products);
- }
- catch(err){
-   next(err);
- }
+exports.getProducts = async (req, res) => {
+  const products = await Product.find();
+  res.json(products);
 };
 
-exports.addProduct=(req,res,next)=>{
- try{
-   const newProduct={id:products.length+1,...req.body};
-   products.push(newProduct);
-   res.json({message:"Product added",newProduct});
- }
- catch(err){
-   next(err);
- }
+exports.getProductById = async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  res.json(product);
+};
+
+exports.addProduct = async (req, res) => {
+  const product = await Product.create(req.body);
+  res.json(product);
+};
+
+exports.updateProduct = async (req, res) => {
+  const product = await Product.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  res.json(product);
+};
+
+exports.deleteProduct = async (req, res) => {
+  await Product.findByIdAndDelete(req.params.id);
+  res.json({ message: "Product deleted" });
 };
