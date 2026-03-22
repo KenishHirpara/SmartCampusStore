@@ -25,16 +25,22 @@ A simple Student Campus Store Web Application where users can browse products an
 ## ⚙️ How to Run
 
 1. Clone the repository
+   ```bash
    git clone https://github.com/KenishHirpara/SmartCampusStore.git
+   ```
 
-2. Install dependencies
+3. Install dependencies
+   ```bash
    cd server
    npm install
+   ```
 
-3. Start the server
+5. Start the server
+   ```bash
    npm start
+   ```
   
-4. Open frontend  
+7. Open frontend  
 Open `index.html` in your browser  
 
 ---
